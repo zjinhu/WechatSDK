@@ -1,11 +1,8 @@
 # WechatOpenSDK
 
-English | [简体中文](README_zh-CHS.md) | [繁体中文](README_zh-CHT.md)
-
 ## What's this?
 
 - Wrap `WeChatOpenSDK-XCFramework.xcframework` and make it easy to use with `Swift Package Manager`.
-- Mirror and automatically keep the version in sync with CocoaPods.
 
 ## Installation
 ### Swift Package Manager (GUI)
@@ -18,7 +15,7 @@ English | [简体中文](README_zh-CHS.md) | [繁体中文](README_zh-CHT.md)
 </details> 
 
  
-<details><summary> 2. Input https://github.com/yanyin1986/WechatOpenSDK.git, and press `Add Package`. </summary>
+<details><summary> 2. Input https://github.com/zjinhu/WechatOpenSDK.git, and press `Add Package`. </summary>
 <p>
 <img width="580" alt="image" src="https://user-images.githubusercontent.com/1109143/229008672-1144a5f7-4099-4ac0-ae4a-8c75cac4eec5.png">
 </p>
