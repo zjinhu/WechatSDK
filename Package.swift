@@ -9,7 +9,9 @@ let package = Package(
         .iOS(.v15)
     ],
     products: [
-        .library(name: "WechatSDK", targets: ["WechatSDK"]),
+        .library(name: "WechatOC", targets: ["WechatOC"]),
+        .library(name: "WechatSwift", targets: ["WechatSwift"]),
+        .library(name: "WechatOpenSDK", targets: ["WechatOpenSDK"]),
     ],
     targets: [
         // 1. 引入官方 xcframework
@@ -18,9 +20,9 @@ let package = Package(
             path: "Sources/WechatOpenSDK-XCFramework.xcframework"),
         // 2. 包一层 Wrapper，暴露给 Swift
         .target(
-            name: "WechatSDK",
+            name: "WechatOC",
             dependencies: ["WechatOpenSDK"],
-            path: "Sources/WechatWrapper",
+            path: "Sources/WechatOC",
             publicHeadersPath: "include",
             cSettings: [
                 .headerSearchPath("include"),
@@ -38,9 +40,9 @@ let package = Package(
         ),
         // Swift API 封装
         .target(
-            name: "WechatManager",
-            dependencies: ["WechatSDK"],
-            path: "Sources/WechatManager"
+            name: "WechatSwift",
+            dependencies: ["WechatOpenSDK"],
+            path: "Sources/WechatSwift"
         )
     ]
 )

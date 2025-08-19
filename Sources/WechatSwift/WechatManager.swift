@@ -5,7 +5,6 @@
 //
 
 import Foundation
-import WechatSDK
 import WechatOpenSDK
 public class WechatManager: NSObject {
     /// It use to store openid, access_token, refresh_token
