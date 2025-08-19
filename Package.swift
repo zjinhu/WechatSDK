@@ -4,16 +4,24 @@
 import PackageDescription
 
 let package = Package(
-    name: "WechatOpenSDK",
+    name: "WechatSDK",
     platforms: [
-        .iOS(.v11)
+        .iOS(.v15)
     ],
     products: [
-        .library(name: "WechatOpenSDK", targets: ["WechatOpenSDK"]),
+        .library(name: "WechatSDK", targets: ["WechatSDK"]),
     ],
     targets: [
+        // 1. 引入官方 xcframework
         .binaryTarget(
             name: "WechatOpenSDK",
-            path: "./Sources/WechatOpenSDK-XCFramework.xcframework")
+            path: "./Sources/WechatOpenSDK-XCFramework.xcframework"),
+        // 2. 包一层 Wrapper，暴露给 Swift
+        .target(
+            name: "WechatSDK",
+            dependencies: ["WechatOpenSDK"],
+            path: "Sources/WechatWrapper",
+            publicHeadersPath: "include"
+        )
     ]
 )
