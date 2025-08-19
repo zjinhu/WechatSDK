@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <WechatOpenSDK/WXApi.h>
 #import <WechatOpenSDK/WechatAuthSDK.h>
-#import <WechatOpenSDK/WXApiObject.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface WechatBridge : NSObject

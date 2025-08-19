@@ -5,6 +5,8 @@
 //  Created by HU on 8/19/25.
 //
 #import "WechatBridge.h"
+#import <WechatOpenSDK/WXApiObject.h>
+
 #define Weixin_GetAccessTokenURL @"https://api.weixin.qq.com/sns/oauth2/access_token?appid=%@&secret=%@&code=%@&grant_type=authorization_code"
 #define Weixin_isAccessTokenCanUse @"https://api.weixin.qq.com/sns/auth?access_token=%@&openid=%@"
 #define Weixin_UseRefreshToken @"https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=%@&grant_type=refresh_token&refresh_token=%@"
