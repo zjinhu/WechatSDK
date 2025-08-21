@@ -2,29 +2,25 @@
 
 ## What's this?
 
-https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Downloads/iOS_Resource.html
+1. 下载SDK：https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Downloads/iOS_Resource.html
+
+2. 获取checksum：
+
+   ```
+   swift package compute-checksum /替换路径/OpenSDK2.0.5_NoPay.zip
+   ```
+
+   
 
 - Wrap `WeChatOpenSDK-XCFramework.xcframework`2.0.5 and make it easy to use with `Swift Package Manager`.
+
 - You can import target: WechatOC in Objective-C or just Target: WechatSwift in Swift without having to create a bridge file again
 
-## Installation
-### Swift Package Manager (GUI)
+  
 
+  如果发生提示微信MinimumOSVersion：
 
-<details><summary> 1. Project -> Package Dependencies -> + </summary>
-<p>
-<img width="580" alt="image" src="https://user-images.githubusercontent.com/1109143/229008330-c7080531-55ac-4431-8748-bd6ab314d990.png">
-</p>
-</details> 
-<details><summary> 2. Input https://github.com/zjinhu/WechatSDK.git, and press `Add Package`. </summary>
-<p>
-<img width="580" alt="image" src="https://user-images.githubusercontent.com/1109143/229008672-1144a5f7-4099-4ac0-ae4a-8c75cac4eec5.png">
-</p>
-</details> 
-
-import WechatSwift
-
-‘’‘
+```
 # 脚本功能: 查找并修改通过SPM引入的WechatOpenSDK.framework的MinimumOSVersion，
 # 使其与主App的部署目标版本(IPHONEOS_DEPLOYMENT_TARGET)保持一致。
 
@@ -47,5 +43,5 @@ else
   # 如果找不到，打印一个警告，这在某些配置下可能是正常的（例如Mac编译）
   echo "Warning: WechatOpenSDK.framework not found in standard path. The script did not run."
 fi
-’‘’
-Done
+```
+
