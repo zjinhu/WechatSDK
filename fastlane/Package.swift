@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "shell",
+  name: "fastlane",
   products: [],
   targets: []
 )
