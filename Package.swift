@@ -34,6 +34,7 @@ let package = Package(
                 .define("SWIFT_PACKAGE")
             ],
             linkerSettings: [
+                .linkedFramework("WebKit"),
                 .linkedFramework("SystemConfiguration"),
                 .linkedFramework("CoreTelephony"),
                 .linkedFramework("CFNetwork"),
@@ -47,7 +48,17 @@ let package = Package(
         .target(
             name: "WechatSwift",
             dependencies: ["WechatOpenSDK"],
-            path: "Sources/WechatSwift"
+            path: "Sources/WechatSwift",
+            linkerSettings: [
+                .linkedFramework("WebKit"),
+                .linkedFramework("SystemConfiguration"),
+                .linkedFramework("CoreTelephony"),
+                .linkedFramework("CFNetwork"),
+                .linkedFramework("Security"),
+                .linkedLibrary("sqlite3"),
+                .linkedLibrary("z"),
+                .linkedLibrary("c++")
+            ]
         )
     ]
 )
