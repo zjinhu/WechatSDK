@@ -185,10 +185,7 @@ extension WechatManager {
         req.scope = "snsapi_userinfo"
         req.state = WechatManager.csrfState
         DispatchQueue.main.async {
-            if !WXApi.isWXAppInstalled(), let topVC = UIApplication.shared.connectedScenes
-                .compactMap({ $0 as? UIWindowScene })
-                .first?.windows
-                .first(where: { $0.isKeyWindow })?.rootViewController {
+            if !WXApi.isWXAppInstalled(), let topVC = UIViewController.currentViewController() {
                 // 微信没有安装 通过短信方式认证(需要弹出一个 webview)
                 WXApi.sendAuthReq(req, viewController: topVC, delegate: WechatManager.shared)
             } else {
@@ -485,6 +482,85 @@ extension WXResult: CustomDebugStringConvertible {
             return "SUCCESS: \(value)"
         case .failure(let error):
             return "FAILURE: \(error)"
+        }
+    }
+}
+
+extension UIWindow {
+    /// get window
+    static var keyWindow: UIWindow? {
+        return UIApplication.shared.connectedScenes
+            .sorted { $0.activationState.sortPriority < $1.activationState.sortPriority }
+            .compactMap { $0 as? UIWindowScene }
+            .compactMap { $0.windows.first { $0.isKeyWindow } }
+            .first
+    }
+}
+
+private extension UIScene.ActivationState {
+    var sortPriority: Int {
+        switch self {
+        case .foregroundActive: return 1
+        case .foregroundInactive: return 2
+        case .background: return 3
+        case .unattached: return 4
+        @unknown default: return 5
+        }
+    }
+}
+extension UIViewController {
+    /// Get the top-level UIViewController according to the window
+    static func currentViewController() -> UIViewController? {
+        
+        let vc = UIWindow.keyWindow?.rootViewController
+        return getCurrentViewController(withCurrentVC: vc)
+    }
+    
+    ///Get the top-level controller recursively according to the controller
+    private static func getCurrentViewController(withCurrentVC VC : UIViewController?) -> UIViewController? {
+        
+        if VC == nil {
+            debugPrint("🌶： Could not find top level UIViewController")
+            return nil
+        }
+        
+        if let presentVC = VC?.presentedViewController {
+            //modal出来的 控制器
+            return getCurrentViewController(withCurrentVC: presentVC)
+            
+        }
+        else
+        if let splitVC = VC as? UISplitViewController {
+            // UISplitViewController 的跟控制器
+            if splitVC.viewControllers.isEmpty {
+                return VC
+            }else{
+                return getCurrentViewController(withCurrentVC: splitVC.viewControllers.last)
+            }
+        }
+        else
+        if let tabVC = VC as? UITabBarController {
+            // tabBar 的跟控制器
+            if let _ = tabVC.viewControllers {
+                return getCurrentViewController(withCurrentVC: tabVC.selectedViewController)
+            }else{
+                return VC
+            }
+        }
+        else
+        if let naiVC = VC as? UINavigationController {
+            // 控制器是 nav
+            if naiVC.viewControllers.isEmpty {
+                return VC
+            }else{
+                //return getCurrentViewController(withCurrentVC: naiVC.topViewController)
+                return getCurrentViewController(withCurrentVC:naiVC.visibleViewController)
+            }
+        }
+        else
+        {
+            // 返回顶控制器
+            return VC
         }
     }
 }
