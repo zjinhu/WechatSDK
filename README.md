@@ -22,7 +22,10 @@
 ```
 # 脚本功能: 查找并修改通过SPM引入的WechatOpenSDK.framework的MinimumOSVersion，
 # 使其与主App的部署目标版本(IPHONEOS_DEPLOYMENT_TARGET)保持一致。
-
+if [ "$ACTION" != "install" ]; then
+  echo "Info: Skip script (only run during Archive)"
+  exit 0
+fi
 # 获取主App的部署目标版本，例如 '15.0'
 TARGET_SDK_VERSION=${IPHONEOS_DEPLOYMENT_TARGET}
 
