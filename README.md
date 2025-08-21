@@ -1,6 +1,5 @@
 # WechatSDK
 
-## What's this?
 
 1. 下载SDK：https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Downloads/iOS_Resource.html
 
@@ -18,7 +17,7 @@
 
   
 
-  如果发生提示微信MinimumOSVersion：
+如果发生提示微信MinimumOSVersion：
 
 ```
 # 脚本功能: 查找并修改通过SPM引入的WechatOpenSDK.framework的MinimumOSVersion，
